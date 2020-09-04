@@ -19,13 +19,13 @@ const RenderTime = (props) => {
 
   return (
     <p>
-      { props.initTime }
-      {/* { hours }:{ formatDoubleDigits(minutes) }:{ formatDoubleDigits(seconds) } */}
+      {/* { props.initTime } */}
+      { hours }:{ formatDoubleDigits(minutes) }:{ formatDoubleDigits(seconds) }
     </p>
   )
 }
 
-const TimerFace = () => {
+const TimerFace = (props) => {
   
   // useEffect(() => {
   //   const interval = setInterval(() => {
@@ -38,7 +38,7 @@ const TimerFace = () => {
   return (
     <myContext.Consumer>
     {context => (
-    <div className="timer-face">
+    <div className="timer-face" id={props.timerId}>
       <RenderTime initTime={context.initTime}/>
     </div>
           )}

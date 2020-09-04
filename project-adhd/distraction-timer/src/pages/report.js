@@ -125,14 +125,14 @@ const ReportPage = () => {
   return (
     <myContext.Consumer>
       {context => (
-      <Layout>
-        <h2>Report</h2>
-        <SEO title="Report" />
-        <div class="row" style={{ display:`flex`}}>
-          <ResultsPanel />
-          <TimePanel />
-        </div>
-      </Layout>
+        <Layout>
+          <h2>Report</h2>
+          <SEO title="Report" />
+          <div class="row" style={{ display:`flex`}}>
+            <ResultsPanel />
+            <TimePanel />
+          </div>
+        </Layout>
       )}
     </myContext.Consumer>
   )

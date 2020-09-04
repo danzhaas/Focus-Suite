@@ -1,48 +1,40 @@
 import React, { useEffect } from "react"
+import ReactDOM from "react-dom"
 import { myContext } from '../components/provider'
 
-function formatDoubleDigits (value) {
-  if (value < 10) {
-    const shortNumber = value.toString(10);
-    const zero = "0";
-    const dubDigits = zero.concat(shortNumber);
-    value = dubDigits;
-  } 
-  return value;
+
+function getTimerValue(startTime) {
+
+  //calculate time passed since task started
+  var timeElapsed = Date.now() - startTime;
+
+  //format the time from seconds to hh:mm:ss format
+  function formatDoubleDigits (value) {
+    if (value < 10) value = "0" + value;
+    return value;
+  };
+  var hours = Math.floor((timeElapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = formatDoubleDigits(Math.floor((timeElapsed % (1000 * 60 * 60)) / (1000 * 60)));
+  var seconds = formatDoubleDigits(Math.floor((timeElapsed % (1000 * 60)) / 1000));
+
+  //render time on the UI
+  const timerValue = (
+    <p>
+      {hours}:{ minutes}:{ seconds}
+    </p>
+  );
+  ReactDOM.render(timerValue, document.getElementById('insertTimerValue'));
+  
 };
 
-const RenderTime = (props) => {
-  var diff = Date.now() - props.initTime;
-  var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-  return (
-    <p>
-      {/* { props.initTime } */}
-      { hours }:{ formatDoubleDigits(minutes) }:{ formatDoubleDigits(seconds) }
-    </p>
-  )
-}
 
 const TimerFace = (props) => {
-  
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     console.log('This will run every second!');
-  //   }, 1000);
+  const { timedEvents, timerDisplayed } = props;
 
-  //   return () => clearInterval(interval);
-  // }, []);
+  setInterval( function(){ getTimerValue( timedEvents[0])}, 1000);
 
   return (
-    <myContext.Consumer>
-    {context => (
-    <div className="timer-face" id={props.timerId}>
-      <RenderTime initTime={context.initTime}/>
-    </div>
-          )}
-          </myContext.Consumer>
+    <div id='insertTimerValue'></div>
   )
 }
 

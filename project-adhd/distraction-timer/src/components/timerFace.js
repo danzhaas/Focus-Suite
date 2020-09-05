@@ -1,41 +1,56 @@
-import React, { useEffect } from "react"
-import ReactDOM from "react-dom"
-import { myContext } from '../components/provider'
+import React, { useState, useEffect } from "react"
 
 
-function getTimerValue(startTime) {
+const TimerFace = (props) => {
+  //choose if standard timer face or distracted timer face 
+  // distracted ?
+  // (
+  //   //elapsed time = sum of distraction periods
+  // )
+  // :
+  // (return());
 
-  //calculate time passed since task started
-  var timeElapsed = Date.now() - startTime;
+  const { distracted, paused, startTime, endTime } = props;
+  const [ secondsPassed, addASecond ] = useState(0);
 
-  //format the time from seconds to hh:mm:ss format
+  //calculate time elapsed since task started.
+  //if paused, display task duration and do not refresh
+  var timeElapsed;
+
+  paused ?
+  (timeElapsed = Date.now() - startTime)
+  :
+  (timeElapsed = endTime - startTime);
+
+  //format the time from Date.now() ms count into hh:mm:ss format
   function formatDoubleDigits (value) {
     if (value < 10) value = "0" + value;
     return value;
   };
-  var hours = Math.floor((timeElapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = formatDoubleDigits(Math.floor((timeElapsed % (1000 * 60 * 60)) / (1000 * 60)));
-  var seconds = formatDoubleDigits(Math.floor((timeElapsed % (1000 * 60)) / 1000));
+  const sec = 1000, min = (sec * 60), hour = (min * 60), day = (hour * 24);
+  var hoursPassed = Math.floor((timeElapsed % day) / hour);
+  var minutesPassed = formatDoubleDigits(Math.floor((timeElapsed % hour) / min));
+  var secondsPassed = formatDoubleDigits(Math.floor((timeElapsed % min) / sec));
 
-  //render time on the UI
-  const timerValue = (
-    <p>
-      {hours}:{ minutes}:{ seconds}
-    </p>
+  //rerender this element every second unless paused
+  paused ? 
+  ()
+  :
+  ( useEffect(() => {
+      const id = setInterval(() => {
+        addASecond( Date.now() );
+      }, 1000);
+    return () => clearInterval(id);
+    }, [])
   );
-  ReactDOM.render(timerValue, document.getElementById('insertTimerValue'));
-  
-};
 
-
-const TimerFace = (props) => {
-  const { timedEvents, timerDisplayed } = props;
-
-  setInterval( function(){ getTimerValue( timedEvents[0])}, 1000);
-
+  //return the time in hh:mm:ss format
   return (
-    <div id='insertTimerValue'></div>
+    <p id="time">
+      {hoursPassed }:{ minutesPassed }:{ secondsPassed }
+    </p>
   )
+
 }
 
 export default TimerFace

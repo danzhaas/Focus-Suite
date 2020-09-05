@@ -48,7 +48,13 @@ const TimePanel = (props) => {
   return(
     <div style={{marginLeft:`1.0875rem`}}>
       <h4>Total Task Time:</h4>
-      <TimerFace timerDisplayed = { timerDisplayed } timedEvents = { timedEvents } />
+      <div id='insertTimerValue' className ="timer-face">
+        { timerDisplayed ?
+          <TimerFace startTime = { timedEvents[0] } />
+          :
+          <p>Hidden</p>
+        }
+      </div>
       <br />
       <Button id="w50" className="timerDisplayButton" text={ timerDisplayed ? ("Hide Timer") : ("Show Timer") } large style={{padding:0, textAlign:`center`}} onClick = {() => toggleTimerDisplayed(!timerDisplayed)} />
       <Button id="w50" text="Stop" onClick={ () => { toggleTimer(); navigate("/report/") }} large/><br />

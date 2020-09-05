@@ -101,7 +101,7 @@ const ResultsPanel = () => (
       <h4 style={{ color:`blue`}}>Distracted x % of total task time</h4>
       <div style={{ marginLeft:`1.0875rem`, width:`25vw`, color:`blue`}}>
         <h4>Distracted Time:</h4>
-        <TimerFace />
+        <TimerFace distracted paused startTime="9090909090" endtime="9099909090" />
       </div>
     </div>
     <br />
@@ -114,7 +114,7 @@ const ResultsPanel = () => (
 const TimePanel = () => (
   <div style={{marginLeft:`1.0875rem`, width:`20vw`}}>
     <h4>Total Task Time:</h4>
-    <TimerFace />
+    <TimerFace paused startTime="9090909090" endtime="9099909090" />
     <br />
     <AnchorButton id="w50" text="Resume Task" href="/timer/" large />
     <AnchorButton id="w50" text="New Task" href="/timer/" large />
@@ -129,8 +129,8 @@ const ReportPage = () => {
           <h2>Report</h2>
           <SEO title="Report" />
           <div class="row" style={{ display:`flex`}}>
-            <ResultsPanel />
-            <TimePanel />
+            <ResultsPanel context={context} />
+            <TimePanel context={context} />
           </div>
         </Layout>
       )}

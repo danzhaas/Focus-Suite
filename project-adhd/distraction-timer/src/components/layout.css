@@ -639,9 +639,17 @@ pre tt:after {
 }
 
 .timer-face > p {
+  width:100%;
   text-align:center;
   font-size:18px;
-  margin:0;
+  margin:auto
+}
+
+#time {
+  width:100%;
+  text-align:center;
+  font-size:18px;
+  margin:auto
 }
 
 #w20 {

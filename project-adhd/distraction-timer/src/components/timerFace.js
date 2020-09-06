@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 
 
+
+
 const TimerFace = (props) => {
   //choose if standard timer face or distracted timer face 
   // distracted ?
@@ -10,17 +12,20 @@ const TimerFace = (props) => {
   // :
   // (return());
 
-  const { distracted, paused, startTime, endTime } = props;
-  const [ secondsPassed, addASecond ] = useState(0);
+  const { distraction, paused, startTime, endTime } = props;
+  const [ renderInterval, addASecond ] = useState(0);
+
+  //switch to set timeElapsed
+
 
   //calculate time elapsed since task started.
   //if paused, display task duration and do not refresh
   var timeElapsed;
-
   paused ?
-  (timeElapsed = Date.now() - startTime)
+  (timeElapsed = endTime - startTime)
   :
-  (timeElapsed = endTime - startTime);
+  (timeElapsed = Date.now() - startTime)
+  // (console.log("test"))
 
   //format the time from Date.now() ms count into hh:mm:ss format
   function formatDoubleDigits (value) {
@@ -32,17 +37,13 @@ const TimerFace = (props) => {
   var minutesPassed = formatDoubleDigits(Math.floor((timeElapsed % hour) / min));
   var secondsPassed = formatDoubleDigits(Math.floor((timeElapsed % min) / sec));
 
-  //rerender this element every second unless paused
-  paused ? 
-  ()
-  :
-  ( useEffect(() => {
-      const id = setInterval(() => {
-        addASecond( Date.now() );
-      }, 1000);
-    return () => clearInterval(id);
-    }, [])
-  );
+  // rerender this element every second
+  useEffect(() => {
+    const id = setInterval(() => {
+      addASecond( Date.now() );
+    }, 1000);
+  return () => clearInterval(id);
+  }, [])
 
   //return the time in hh:mm:ss format
   return (

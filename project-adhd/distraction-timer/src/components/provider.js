@@ -3,8 +3,6 @@ import React, { useState } from 'react'
 export const myContext = React.createContext()
 
 const Provider = props => {
-    // const [timeInit, startTime] = useState(75);
-    // const [timeFinal, endTime] = useState(0);
     const [timedEvents, addTimedEvents] = useState([]);
 
     return (

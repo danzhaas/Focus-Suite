@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react"
 
 
+
+
 const TimerFace = (props) => {
   //choose if standard timer face or distracted timer face 
-
+  // distracted ?
+  // (
+  //   //elapsed time = sum of distraction periods
+  // )
+  // :
+  // (return());
 
   const { distraction, paused, startTime, endTime } = props;
   const [ renderInterval, addASecond ] = useState(0);

@@ -1,105 +1,18 @@
 import React from "react"
-import { Chart } from "react-google-charts"
-import { AnchorButton, ButtonGroup, Button, InputGroup } from "@blueprintjs/core"
+import { AnchorButton } from "@blueprintjs/core"
 import Layout from "../components/layout"
 import TimerFace from "../components/timerFace"
+import PieChart from "../components/pieChart"
+import Timeline from "../components/timeline"
 import { myContext } from '../components/provider'
 import SEO from "../components/seo"
 
 
-const PieChart = () => (
-<Chart
-  width={'20vh'}
-  height={'20vh'}
-  chartType="PieChart"
-  loader={<div>Loading Chart</div>}
-  data={[
-    ['Task', 'Hours per Day'],
-    ['Task', 2],
-    ['Distracted', 11],
-  ]}
-  options={{
-    tooltip: { trigger: 'none' },
-    legend: 'none',
-    pieSliceText: 'none',
-  }}
-  rootProps={{ 'data-testid': '1' }}
-/>
-)
-
-const Timeline = () => (
-<Chart
-  width={'100%'}
-  height={'100px'}
-  chartType="Timeline"
-  loader={<div>Loading Chart</div>}
-  data={[
-    [
-      { type: 'string', id: 'Focus' },
-      { type: 'string', id: 'Name' },
-      { type: 'date', id: 'Start' },
-      { type: 'date', id: 'End' },
-    ],
-    [
-      'Focus',
-      'Task',
-      new Date(0, 0, 0, 12, 0, 0),
-      new Date(0, 0, 0, 13, 30, 0),
-    ],
-    [
-      'Focus',
-      'Distracted',
-      new Date(0, 0, 0, 13, 30, 0),
-      new Date(0, 0, 0, 15, 30, 0),
-    ],
-    [
-      'Focus',
-      'Task',
-      new Date(0, 0, 0, 15, 30, 0),
-      new Date(0, 0, 0, 17, 30, 0),
-    ],
-    [
-      'Focus',
-      'Distracted',
-      new Date(0, 0, 0, 17, 30, 0),
-      new Date(0, 0, 0, 19, 0, 0),
-    ],
-    [
-      'Focus',
-      'Task',
-      new Date(0, 0, 0, 19, 0, 0),
-      new Date(0, 0, 0, 22, 0, 0),
-    ],
-    [
-      'Focus',
-      'Distracted',
-      new Date(0, 0, 0, 22, 0, 0),
-      new Date(0, 0, 0, 23, 0, 0),
-    ],
-    [
-      'Focus',
-      'Task',
-      new Date(0, 0, 0, 23, 0, 0),
-      new Date(0, 0, 0, 23, 59, 0),
-    ],
-  ]}
-  options={{
-    timeline: {
-      showRowLabels: false, 
-      showBarLabels: true
-    },
-    avoidOverlappingGridLines: false
-  }}
-  rootProps={{ 'data-testid': '3' }}
-/>
-)
-
 const ResultsPanel = () => (
-  <div style={{ width:`70vw`}}>
-    <div className="row" style={{ display:`flex`}}>
+  <div style={{ width: `70vw` }}>
+    <div className="row" style={{ display: `flex` }}>
       <PieChart />
-      <h4 style={{ color:`blue`}}>Distracted x % of total task time</h4>
-      <div style={{ marginLeft:`1.0875rem`, width:`25vw`, color:`blue`}}>
+      <div style={{ marginLeft: `1.0875rem`, width: `25vw`, color: `blue` }}>
         <h4>Distracted Time:</h4>
         <TimerFace paused distraction startTime="1599365409539" endTime="1599365412295" />
       </div>
@@ -112,7 +25,7 @@ const ResultsPanel = () => (
 )
 
 const TimePanel = () => (
-  <div style={{marginLeft:`1.0875rem`, width:`20vw`}}>
+  <div style={{ marginLeft: `1.0875rem`, width: `20vw` }}>
     <h4>Total Task Time:</h4>
     <TimerFace paused startTime="1599365409539" endTime="1599365412295" />
     <br />
@@ -128,7 +41,7 @@ const ReportPage = () => {
         <Layout>
           <h2>Report</h2>
           <SEO title="Report" />
-          <div className="row" style={{ display:`flex`}}>
+          <div className="row" style={{ display: `flex` }}>
             <ResultsPanel context={context} />
             <TimePanel context={context} />
           </div>

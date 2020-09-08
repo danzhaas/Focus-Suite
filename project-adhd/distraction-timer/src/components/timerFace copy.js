@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from "react"
 
 
-
+function sumDurations (eventArray, eventType) {
+  console.log(eventArray);
+  var startIndex;
+  var durations = [];
+  eventType === "tasks" ? ( startIndex = 0 ) : ( startIndex = 1 );
+  for ( var i=startIndex; i<(eventArray.length-1); i = (i + 2)) {
+      var eventDuration = (eventArray[(i+1)] - eventArray[i]);
+      durations.push(eventDuration);
+  };
+  if (durations.length === 0) {
+      durations = 0;
+  } else {
+  durations = durations.reduce((total, num) => (total + num));
+  }
+  return durations
+}
 
 const TimerFace = (props) => {
-  //choose if standard timer face or distracted timer face 
-  // distracted ?
-  // (
-  //   //elapsed time = sum of distraction periods
-  // )
-  // :
-  // (return());
-
-  const { distraction, paused, startTime, endTime } = props;
+  const { distraction, paused, timedEvents } = props;
   const [ renderInterval, addASecond ] = useState(0);
 
   //switch to set timeElapsed
@@ -21,10 +28,14 @@ const TimerFace = (props) => {
   //calculate time elapsed since task started.
   //if paused, display task duration and do not refresh
   var timeElapsed;
-  paused ?
-  (timeElapsed = endTime - startTime)
-  :
-  (timeElapsed = Date.now() - startTime)
+  if (distraction) {
+    timeElapsed = sumDurations( timedEvents, "distractions" )
+  } else {
+    paused ?
+    (timeElapsed = timedEvents[timedEvents.length-1] - timedEvents[0])
+    :
+    (timeElapsed = Date.now() - timedEvents[0])
+  }
   // (console.log("test"))
 
   //format the time from Date.now() ms count into hh:mm:ss format

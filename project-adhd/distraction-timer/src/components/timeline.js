@@ -2,7 +2,23 @@ import React from "react"
 import { myContext } from '../components/provider'
 import { Chart } from "react-google-charts"
 
+
+function adjustTimeline (array) {
+    var adjustedTimeline =[];
+    //When i > i+1, set i+1 = i.
+    for ( var i = 0; i < array.length; i = i + 2 ) {
+        var num;
+        array[i] >= array[i+1] ? (num = i) : (num = i+1);
+        adjustedTimeline.push(array[i], array[num]);
+    }
+    return adjustedTimeline;
+}
+
 function makeDatatable (array) {
+    //Adjust timeline for inconsistencies of event time reporting
+    const adjustedTimeline = adjustTimeline (array);
+    
+    //Making the datatable
     const datatable = [
     //The first object in the datatable is columns:
         [
@@ -13,16 +29,15 @@ function makeDatatable (array) {
         ]
     ];
     //the rest of the items are rows data corresponding to the columns
-    for ( var i = 0; i < array.length-1; i++ ) { 
+    for ( var i = 0; i < adjustedTimeline.length-1; i++ ) { 
         var row = [
             "focus",
             i%2 === 0 ? ("focus") : ("distracted"),
-            array[i],
-            array[i+1],
+            adjustedTimeline[i],
+            adjustedTimeline[i+1],
         ];
         datatable.push(row);
     }
-    console.log(datatable);
     return datatable;
 }
 
@@ -41,7 +56,8 @@ const Timeline = () => (
                         showRowLabels: false,
                         showBarLabels: true
                     },
-                    avoidOverlappingGridLines: false
+                    avoidOverlappingGridLines: false,
+                    colors: ['#818181', '#4266f5'],
                 }}
                 rootProps={{ 'data-testid': '3' }}
             />

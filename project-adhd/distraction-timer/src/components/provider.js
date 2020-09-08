@@ -34,6 +34,9 @@ const Provider = props => {
                 timedEvents.push(distractBegin, distractEnd);
                 addTimedEvents(timedEvents);
                 console.log(timedEvents)
+            },
+            resetTimer () {
+                addTimedEvents([]);
             }
         }}>
             {props.children}

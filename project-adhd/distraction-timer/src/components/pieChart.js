@@ -2,26 +2,29 @@ import React from "react"
 import { myContext } from '../components/provider'
 import { Chart } from "react-google-charts"
 
-function adjustTimeline (array) {
-    var adjustedTimeline =[];
-        //When i > i+1, set i+1 = i.
-        for ( var i = 0; i < array.length; i = i + 2 ) {
-            var num;
-            array[i] >= array[i+1] ? (num = i) : (num = i+1);
-            adjustedTimeline = adjustedTimeline.push(array[i], array[num])
-        }
-        return adjustedTimeline;
-    }
 
-function sumDurations (eventArray, eventType) {
+function sumDurations (array, eventType) {
+    // adjust timeline for inconsistent time reporting
+    var adjustedTimeline =[];
+    //When one distraction 2 start time is before distraction 1 end time, reset the distraction 2 begin time to equal distraction 1 end.  i > i+1, set i+1 = i.
+    for ( var i = 0; i < array.length; i = i + 2 ) {
+        var num;
+        array[i] >= array[i+1] ? (num = i) : (num = i+1);
+        adjustedTimeline.push(array[i], array[num]);
+    }
+    // pick appropriate sets of event times to count duration of either task or distractions
     var startIndex;
     var durations = [];
     eventType === "tasks" ? ( startIndex = 0 ) : ( startIndex = 1 );
-    for ( var i=startIndex; i<(eventArray.length-1); i = (i + 2)) {
-        var eventDuration = (eventArray[(i+1)] - eventArray[i]);
+    for ( var i = startIndex; i < ( adjustedTimeline.length-1); i = (i + 2)) {
+        var eventDuration = (adjustedTimeline[(i+1)] - adjustedTimeline[i]);
         durations.push(eventDuration);
     };
+    if (durations.length === 0) {
+        durations = 0;
+    } else {
     durations = durations.reduce((total, num) => (total + num));
+    }
     return durations
 }
 
@@ -56,6 +59,7 @@ const PieChart = () => (
                         tooltip: { trigger: 'none' },
                         legend: 'none',
                         pieSliceText: 'none',
+                        colors: ['#4266f5', '#818181'],
                     }}
                     rootProps={{ 'data-testid': '1' }}
                 />

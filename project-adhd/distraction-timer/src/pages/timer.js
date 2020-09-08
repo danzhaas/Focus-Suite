@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { AnchorButton, ButtonGroup, Button, InputGroup } from "@blueprintjs/core";
-import Layout from "../components/layout"
-import TimerFace from "../components/timerFace"
+import { ButtonGroup, Button, InputGroup } from "@blueprintjs/core";
 import { myContext } from '../components/provider'
 import { navigate } from "gatsby"
 import SEO from "../components/seo"
-
+import Layout from "../components/layout"
+import TimerFace from "../components/timerFace"
 
 
 const CustomTimePanel = (props) => {
@@ -20,8 +19,8 @@ const CustomTimePanel = (props) => {
 }
 
 const DistractedButtonPanel = (props) => {
-  // var timedEvents = props.timedEvents;
-  var logDistraction = props.logDistraction;
+  const { logDistraction } = props;
+
   return(
     <div style={{ display: `flex`, flexDirection: `column`}}>
       <h4>How many minutes were you distracted?</h4>
@@ -41,23 +40,38 @@ const DistractedButtonPanel = (props) => {
   )
 }
 
-const TimePanel = (props) => {
-  const { toggleTimer, timedEvents } = props.context;
+const TimePanel = ( props ) => {
+  const { toggleTimer } = props;
   const [timerDisplayed, toggleTimerDisplayed] = useState(true);
 
   return(
     <div style={{marginLeft:`1.0875rem`}}>
-      <h4>Total Task Time:</h4>
-      <div id='insertTimerValue' className ="timer-face">
         { timerDisplayed ?
-          <TimerFace startTime = { timedEvents[0] } />
-          :
-          <p>Hidden</p>
+          ( <TimerFace timerName={`Total Task Time`} />) 
+          : 
+          ( <>
+              <h4>Total Task Time</h4>
+              <div className ="timer-face">
+                <p>Hidden</p>
+              </div>
+            </> )
         }
-      </div>
       <br />
-      <Button id="w50" className="timerDisplayButton" text={ timerDisplayed ? ("Hide Timer") : ("Show Timer") } large style={{padding:0, textAlign:`center`}} onClick = {() => toggleTimerDisplayed(!timerDisplayed)} />
-      <Button id="w50" text="Stop" onClick={ () => { toggleTimer(); navigate("/report/") }} large/><br />
+
+      <Button id="w50" 
+        className="timerDisplayButton" 
+        text={ timerDisplayed ? ("Hide Timer") : ("Show Timer") } 
+        large 
+        style={{padding:0, textAlign:`center`}} 
+        onClick = {() => toggleTimerDisplayed(!timerDisplayed)} 
+      />
+      <Button id="w50" 
+        text="Stop" 
+        large 
+        onClick={ () => { navigate("/report/") }} 
+        onClick={ () => { toggleTimer(); navigate("/report/") }} 
+      />
+      <br />
     </div>
   )
 }
@@ -70,8 +84,9 @@ const TimerPage = () => {
           <h2>Task in Progress</h2>
           <SEO title="Timer" />
           <div style={{ display: `flex`, }}>
-            <DistractedButtonPanel logDistraction = {context.logDistraction} timedEvents = {context.timedEvents} />
-            <TimePanel context={context} />
+            <DistractedButtonPanel logDistraction = {context.logDistraction} />
+            {/* <DistractedButtonPanel logDistraction = {context.logDistraction} timedEvents = {context.timedEvents} /> */}
+            <TimePanel toggleTimer={context.toggleTimer}/>
           </div>
         </Layout>
       )}

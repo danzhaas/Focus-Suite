@@ -2,22 +2,6 @@ import React, { useState, useEffect } from "react"
 import { myContext } from '../components/provider'
 
 
-// function sumDurations(eventArray, eventType) {
-//   var startIndex;
-//   var durations = [];
-//   eventType === "tasks" ? (startIndex = 0) : (startIndex = 1);
-//   for (var i = startIndex; i < (eventArray.length - 1); i = (i + 2)) {
-//     var eventDuration = (eventArray[(i + 1)] - eventArray[i]);
-//     durations.push(eventDuration);
-//   };
-//   if (durations.length === 0) {
-//     durations = 0;
-//   } else {
-//     durations = durations.reduce((total, num) => (total + num));
-//   }
-//   return durations
-// }
-
 function sumDurations (array, eventType) {
   // adjust timeline for inconsistent time reporting
   var adjustedTimeline =[];
@@ -102,7 +86,6 @@ const TimerFace = (props) => {
       )}
     </myContext.Consumer>
   )
-
 }
 
 export default TimerFace

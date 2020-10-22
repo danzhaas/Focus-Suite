@@ -1,0 +1,59 @@
+header {
+  margin-bottom: 1rem;
+}
+header h1 {
+  margin: 0;
+  color: white;
+}
+
+header, footer {
+  background-color: #663399;
+}
+header > *, footer > * {
+  width: 600px;
+  margin: 0 auto;
+  padding: 1rem 0;
+  color: white;
+}
+
+#w20 {
+  width: 20%;
+}
+
+#w50 {
+  width: 50%;
+}
+
+h4 {
+  margin-bottom: 0.5rem;
+}
+
+#nonhover:hover {
+  background-color: #f5f8fa;
+}
+
+.timer-face {
+  position: relative;
+  height: 40px;
+  padding: 6px 0 0 0;
+  border: 1px solid rgba(16, 22, 26, 0.2);
+  border-radius: 3px;
+  background-color: #b3b3b3;
+  color: white;
+}
+
+.timer-face > p {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  margin: auto;
+}
+
+#time {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  margin: auto;
+}
+
+/*# sourceMappingURL=styles.css.map */

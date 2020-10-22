@@ -6,7 +6,7 @@ import Layout from "../components/layout"
 import TimerFace from "../components/timerFace"
 import PieChart from "../components/pieChart"
 import Timeline from "../components/timeline"
-import SEO from "../components/seo"
+// import SEO from "../components/seo"
 
 
 const ResultsPanel = () => (
@@ -17,7 +17,6 @@ const ResultsPanel = () => (
         <TimerFace timerName={`Distracted Time`} paused distraction />
       </div>
     </div>
-    <br />
     <div className="row">
       <Timeline />
     </div>
@@ -53,7 +52,7 @@ const ReportPage = () => {
   return (
     <Layout>
       <h2>Report</h2>
-      <SEO title="Report" />
+      {/* <SEO title="Report" /> */}
       <div className="row" style={{ display: `flex` }}>
         <ResultsPanel />
         <TimePanel />

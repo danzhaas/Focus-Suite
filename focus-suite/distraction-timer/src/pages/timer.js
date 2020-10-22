@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ButtonGroup, Button, InputGroup } from "@blueprintjs/core";
 import { myContext } from '../components/provider'
 import { navigate } from "gatsby"
-import SEO from "../components/seo"
+// import SEO from "../components/seo"
 import Layout from "../components/layout"
 import TimerFace from "../components/timerFace"
 
@@ -82,7 +82,7 @@ const TimerPage = () => {
       {context => (
         <Layout>
           <h2>Task in Progress</h2>
-          <SEO title="Timer" />
+          {/* <SEO title="Timer" /> */}
           <div style={{ display: `flex`, }}>
             <DistractedButtonPanel logDistraction = {context.logDistraction} />
             {/* <DistractedButtonPanel logDistraction = {context.logDistraction} timedEvents = {context.timedEvents} /> */}

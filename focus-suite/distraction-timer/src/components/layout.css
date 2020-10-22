@@ -624,42 +624,4 @@ pre tt:after {
 @import "~@blueprintjs/core/lib/css/blueprint.css";
 @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
 
-#nonhover:hover {
-  background-color: #f5f8fa;
-}
 
-.timer-face {
-  position:relative;
-  height:40px;
-  padding: 6px 0 0 0;
-  border: 1px solid rgba(16, 22, 26, 0.2);
-  border-radius:3px;
-  background-color: #b3b3b3;
-  color:white;
-}
-
-.timer-face > p {
-  width:100%;
-  text-align:center;
-  font-size:18px;
-  margin:auto
-}
-
-#time {
-  width:100%;
-  text-align:center;
-  font-size:18px;
-  margin:auto
-}
-
-#w20 {
-  width:20%
-}
-
-#w50 {
-  width:50%
-}
-
-h4 {
-  margin-bottom:0.5rem
-}

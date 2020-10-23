@@ -1,3 +1,11 @@
+header, footer, main {
+    padding: 1rem
+}
+
+main {
+    max-width:100%
+}
+
 header {
     margin-bottom: 1rem;
 
@@ -12,17 +20,20 @@ header, footer {
 
     > * {
         width: 600px;
+        max-width:100%;
         margin: 0 auto;
         padding: 1rem 0;
         color:white
     }
 }
 
-#w20 {
-    width:20%
+#pages {
+    margin: 0 auto;
+    width:600px;
+    max-width:100%
 }
 
-#w50 {
+#w50, .w50 {
     width:50%
 }
 
@@ -30,8 +41,38 @@ h4 {
     margin-bottom:0.5rem
 }
 
+#timer-page-layout, .report-page-layout {
+    display:flex;
+    flex-direction: column;
+}
 
-#nonhover:hover {
+#timer-button-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.distraction-timer {
+    h4 {
+        color:blue;
+    }
+    div {
+        color: blue;
+    }
+}
+
+.panel-button {
+    width:33%;
+    padding:15px
+}
+
+#custom-time {
+    width:66%;
+    display: flex;
+    flex-direction: row;
+}
+
+#custom-time:hover {
     background-color: #f5f8fa;
 }
 
@@ -42,7 +83,7 @@ h4 {
     border: 1px solid rgba(16, 22, 26, 0.2);
     border-radius:3px;
     background-color: #b3b3b3;
-    color:white;
+    color:black;
 }
 
 .timer-face > p {
@@ -52,9 +93,133 @@ h4 {
     margin:auto
 }
 
+#timer-page-timer {
+    margin:1rem 0;
+}
+
 #time {
     width:100%;
     text-align:center;
     font-size:18px;
     margin:auto
+}
+
+#timerFace-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.report-page-layout>:nth-child(1) {
+    margin-bottom:-15px;
+    z-index: 10;
+}
+
+#report-timers {
+    display: flex;
+    flex-direction: row;
+}
+
+#report-buttons {
+    width:100%;
+    margin-top:1rem;
+    > * {
+        width:50%
+    }
+    * {
+        text-align:center;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    // body {
+    //     height:450px;
+    //     overflow-y:hidden
+    // }
+    #layout-level {
+        height:400px;
+        display: flex;
+        flex-direction: column;
+        justify-content:space-between
+    }
+    header, footer {
+        margin-bottom:0;    
+        > * {
+            padding: 0.25rem 0;
+        }
+    }
+    h1 {
+        font-size:1.75rem
+    }
+    h2 {
+        font-size:1.5rem
+    }
+    #timer-page-layout, .report-page-layout {
+        flex-direction: row;
+    }
+    .panel-button {
+        width:20%;
+    }
+    #custom-time {
+        width:60%;
+        display: flex;
+        flex-direction: row;
+    }
+    #timer-page-timer {
+        margin: 0 0 0 1rem;
+    }
+    #report-buttons {
+        margin-top:0;
+        width:30%;
+    }
+    .report-page-layout {
+        flex-wrap:wrap;
+        > * {
+            padding:5px;
+        }
+        >:nth-child(1) { 
+            order:1;
+            width:100%;
+            margin-bottom:0
+        }
+        // Pie
+        >:nth-child(2) { 
+            order:2;
+            max-width:20%;
+            margin-top:-10px;
+            * {
+                max-width:100%
+            }
+        }
+        // percent report
+        >:nth-child(3) { 
+            order:3; 
+            width:20%
+        } 
+        
+        // dist time
+        >:nth-child(5) { 
+            order:4; 
+            width:30%
+        } 
+        
+        // total time
+        >:nth-child(6) { 
+            order:5; 
+            width:30%
+        } 
+        
+        // line
+        >:nth-child(4) { 
+            order:6; 
+            width:70%;
+            margin-bottom:-25px
+        } 
+        
+        // buttons
+        >:nth-child(7) { 
+            order:7; 
+            width:30%
+        } 
+
+    }
 }

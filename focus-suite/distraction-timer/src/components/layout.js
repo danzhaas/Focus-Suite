@@ -7,40 +7,34 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-// import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
 import { Link } from "gatsby"
 import "./layout.css"
 import "../styles.css"
 
 const Layout = ({ children }) => {
 
-  // const data = useStaticQuery(graphql`
-  //   query SiteTitleQuery {
-  //     site {
-  //       siteMetadata {
-  //         title
-  //       }
-  //     }
-  //   }
-  // `)
+  const data = useStaticQuery(graphql`
+    query SiteTitleQuery {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `)
 
   return (
-    <>
+    <div id="layout-level">
       <header>
         <div>
-          <Link 
-            to="/" 
-            style={{color: `white`, textDecoration: `none`}}
-          >
+          <Link to="/" style={{color: `white`, textDecoration: `none`}} >
             <h1>Distraction Timer</h1>
           </Link>
         </div>
       </header>
       
-      <div
-        id="pages"
-        style={{margin: `0 auto`, width: `600px`, padding: `0 1.0875rem 1rem`}}
-      >
+      <div id="pages">
         <main>
           {children}
         </main>
@@ -49,7 +43,7 @@ const Layout = ({ children }) => {
       <footer>
         <p>© Dan Z Haas {new Date().getFullYear()}</p>
       </footer>
-    </>
+    </div>
   )
 }
 

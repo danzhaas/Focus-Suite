@@ -32,7 +32,6 @@ const TimerFace = (props) => {
   const { timerName, distraction, paused } = props;
   const [renderInterval, addASecond] = useState(0);
 
-
   function formatTime(array) {
     //calculate time elapsed since task started.
     //if paused, display task duration and do not refresh
@@ -64,7 +63,6 @@ const TimerFace = (props) => {
     )
   }
 
-
   // rerender this element every second
   useEffect(() => {
     const id = setInterval(() => {
@@ -73,16 +71,17 @@ const TimerFace = (props) => {
     return () => clearInterval(id);
   }, [])
 
-
+  //Put it all together into this layout
   return (
     <myContext.Consumer>
       {context => (
-        <>
-          <h4>{ timerName }</h4>
-          <div className ="timer-face">
+        <div id="timerFace-div" className={ distraction ? ("distraction-timer") : ("") }>
+          <h4>
+            { timerName }</h4>
+          <div className="timer-face">
             {formatTime( context.timedEvents )}
           </div>
-        </>
+        </div>
       )}
     </myContext.Consumer>
   )

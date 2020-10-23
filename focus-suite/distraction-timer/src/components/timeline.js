@@ -46,7 +46,7 @@ const Timeline = () => (
     <myContext.Consumer>
         {context => (
             <Chart
-                width={'100%'}
+                // width={'100%'}
                 height={'100px'}
                 chartType="Timeline"
                 loader={<div>Loading Chart</div>}

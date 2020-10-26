@@ -1,3 +1,14 @@
+#layout-level {
+  height: 100vh;
+  position: relative;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
 header, footer, main {
   padding: 1rem;
 }
@@ -18,7 +29,7 @@ header, footer {
   background-color: #663399;
 }
 header > *, footer > * {
-  width: 600px;
+  width: 100%;
   max-width: 100%;
   margin: 0 auto;
   padding: 1rem 0;
@@ -127,13 +138,6 @@ h4 {
 }
 
 @media only screen and (min-width: 600px) {
-  #layout-level {
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
   header, footer {
     margin-bottom: 0;
   }

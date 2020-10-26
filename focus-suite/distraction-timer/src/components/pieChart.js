@@ -9,8 +9,8 @@ const PieChart = (props) => {
             <Chart
                 id="pie"
                 width={'100%'}
-                height={ (window.width<600) ? '200px' : '100px'}
-                // height={'100px'}
+                // height={ (window.width<600) ? '200px' : '100px'}
+                height={'100px'}
                 chartType="PieChart"
                 loader={<div>Loading Chart</div>}
                 data={[

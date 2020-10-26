@@ -11,9 +11,15 @@ const IndexPage = () => {
     <myContext.Consumer>
       {context => (
         <Layout>
-          <h2>Home</h2>
+          <h2>Welcome</h2>
           <SEO title="Home" />
-          <p>This is a tool for keeping track of how many times you are distracted during a task and how long you are distracted.  With an awareness of exactly how much time you lose to distraction, you can appreciate how valuable it is to prevent the distractions.</p>
+          <p>
+            This stopwatch tracks how long you work on a task and how many times you were distracted.
+            <br/><br/>
+            <span style={{fontWeight:`bold`}}>How to use this app:</span> Press Start to begin timer.  During your task, anytime you realize you have been distracted, estimate how long you have been distracted, then press the corresponding button to log that time.  Press Stop Timer when the task is finished to see your results.  
+            <br/><br/>
+            With an awareness of exactly how much time you lose, you can appreciate how valuable it is to prevent distractions.
+          </p>
           <Button 
             text="Start" 
             style={{ float:`right` }} 

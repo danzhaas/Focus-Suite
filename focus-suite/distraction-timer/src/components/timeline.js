@@ -2,21 +2,21 @@ import React from "react"
 import { myContext } from '../components/provider'
 import { Chart } from "react-google-charts"
 
-
-function adjustTimeline (array) {
-    var adjustedTimeline =[];
+//Adjust timeline for inconsistencies of event time reporting
+function validateTimeline (array) {
+    var validatedTimeline =[];
     //When i > i+1, set i+1 = i.
     for ( var i = 0; i < array.length; i = i + 2 ) {
         var num;
         array[i] >= array[i+1] ? (num = i) : (num = i+1);
-        adjustedTimeline.push(array[i], array[num]);
+        validatedTimeline.push(array[i], array[num]);
     }
-    return adjustedTimeline;
+    return validatedTimeline;
 }
 
 function makeDatatable (array) {
     //Adjust timeline for inconsistencies of event time reporting
-    const adjustedTimeline = adjustTimeline (array);
+    const validatedTimeline = validateTimeline (array);
     
     //Making the datatable
     const datatable = [
@@ -29,12 +29,12 @@ function makeDatatable (array) {
         ]
     ];
     //the rest of the items are rows data corresponding to the columns
-    for ( var i = 0; i < adjustedTimeline.length-1; i++ ) { 
+    for ( var i = 0; i < validatedTimeline.length-1; i++ ) { 
         var row = [
             "focus",
             i%2 === 0 ? ("focus") : ("distracted"),
-            adjustedTimeline[i],
-            adjustedTimeline[i+1],
+            validatedTimeline[i],
+            validatedTimeline[i+1],
         ];
         datatable.push(row);
     }
@@ -58,6 +58,7 @@ const Timeline = () => (
                     },
                     avoidOverlappingGridLines: false,
                     colors: ['#818181', '#4266f5'],
+                    hAxis: {format:'hh:mm aa'}
                 }}
                 rootProps={{ 'data-testid': '3' }}
             />
